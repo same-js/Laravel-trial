@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/** Ajax経由で俳句を投稿するメソッドの呼び出し */
+Route::post('/haiku_history_update', 'HomeController@inserthaikuByAjax');

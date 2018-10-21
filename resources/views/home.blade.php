@@ -27,6 +27,8 @@
                       </div>
                     </form>
                     <button id="ajax_sub">送信</button>
+                    <hr>
+                    <a href="./haiku_history">俳句投稿履歴</a>
                 </div>
             </div>
         </div>

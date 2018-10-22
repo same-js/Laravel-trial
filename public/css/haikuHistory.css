@@ -1,0 +1,10 @@
+th.analysisColmn {
+  width: 50px;
+}
+td.analysisColmn {
+  text-align: right;
+}
+
+table {
+  font-size: 80%;
+}

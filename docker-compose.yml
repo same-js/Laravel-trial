@@ -1,0 +1,31 @@
+# 下記に従って構築
+# https://www.hypertextcandy.com/vue-laravel-tutorial-setting-up-spa-project/
+# 参考：
+# https://qiita.com/yuta-ushijima/items/d3d98177e1b28f736f04
+
+
+# compose ファイルフォーマットのバージョン。バージョンにより、compose file （docker-compose.yml）の書き方が異なる
+version: '3'
+
+# アプリケーションを動かすための各要素（DB、webサーバなど）の設定を記載
+# build: ComposeFileを実行し、ビルドされるときのpath
+# volumes: マウントする設定ファイルのpath
+# ports: Imageを立ち上げる時のポート番号。 <Host IP>:<Host Port>:<Container Port> の形式で書く
+# restart: 再起動ポリシーの設定。 always にすると、Dockerデーモンの起動時やホストOSの起動時に、自動的にコンテナが開始される
+services:
+  vuesplash_web:
+    build: .
+    volumes:
+      - ./web:/var/www/html/vuesplash
+    ports:
+      - 8081:8081
+      - 3000:3000
+  vuesplash_database:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - 5434:5432

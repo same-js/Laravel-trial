@@ -11,5 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+// BrowserSync を利用することで、 JSやPHP更新時に、ブラウザが自動リロードする
+mix.browserSync({
+      proxy: '0.0.0.0:8081',
+      open: false
+    })
+    .js('resources/js/app.js', 'public/js')
+    .version(); // ブラウザがキャッシュを参照しないようにする（開発時には有効にすると便利）

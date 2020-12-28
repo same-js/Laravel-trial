@@ -23,6 +23,7 @@ const routes = [
 
 // VueRouterインスタンスの作成
 const router = new VueRouter({
+  mode: 'history', // history を指定すると、URLにハッシュが記号が付与されないようになる
   routes
 })
 

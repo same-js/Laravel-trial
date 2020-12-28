@@ -11,7 +11,8 @@ version: '3'
 # build: ComposeFileを実行し、ビルドされるときのpath
 # volumes: マウントする設定ファイルのpath
 # ports: Imageを立ち上げる時のポート番号。 <Host IP>:<Host Port>:<Container Port> の形式で書く
-# restart: 再起動ポリシーの設定。 always にすると、Dockerデーモンの起動時やホストOSの起動時に、自動的にコンテナが開始される
+# restart: 再起動ポリシーの設定。 「- restart: always」 と記述すると、Dockerデーモンの起動時やホストOSの起動時に、自動的にコンテナが開始される
+#          ただし、開発時には有効にしないほうが良いかもしれない
 services:
   vuesplash_web:
     build: .
@@ -22,7 +23,6 @@ services:
       - 3000:3000
   vuesplash_database:
     image: postgres:11-alpine
-    restart: always
     environment:
       POSTGRES_PASSWORD: secret
     volumes:

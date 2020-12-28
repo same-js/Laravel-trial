@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// SPAのため、どのページへのアクセスでも同じviewを返す
+// URLごとの描画は、クライアント側で行う
+Route::get('/{any?}', fn() => view('index') )->where('any', '.+');
+// ちなみに、上記はPHP7.4から導入されたアロー関数を用いた書き方
+// つまり、下記と同じ
+// Route::get('/{any?}', function () { view('index'); } );

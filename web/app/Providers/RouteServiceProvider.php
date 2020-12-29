@@ -73,7 +73,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
+            // 今回のAPIは内部呼出のみ + cookie認証を行うステートフルであるため、 middleware は api ではなく web を使用する
+             ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }

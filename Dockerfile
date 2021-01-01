@@ -26,6 +26,10 @@ RUN apt-get update \
   && chmod 755 /install-composer.sh \
   && /install-composer.sh \
   && mv composer.phar /usr/local/bin/composer
+# 【補足】
+# RUN コマンド1回の実行につき、イメージレイヤが1つ生成される
+# イメージレイヤは、RUN や ADD により、ファイルシステムに加えられた変更の単位
+# つまり、可能な限り処理は && や ; で接続し、ワンライナーで実行できるように書くことが推奨されている
 
 # ワークディレクトリを設定する
 # Dockerfile 内にてその後に続く RUN、CMD、ENTRYPOINT、COPY、ADD の各命令において利用する

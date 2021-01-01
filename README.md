@@ -58,3 +58,17 @@ $ npm run watch # コンテナ内で実行
 そのため、ブラウザで http://localhost:3000 を開いている場合、  
 アセット類に変更を加えて保存すると、その瞬間にブラウザで開いているページが自動でリロードされ  
 コンパイル後のページが表示される。
+
+## 自動テストについて
+phpunitを使用する。
+
+### テスト実行コマンド
+
+```sh
+$ cd path/to/
+$ docker-compose exec vuesplash_web bash
+$ ./vendor/bin/phpunit --testdox # コンテナ内で実行
+```
+
+### 補足
+テスト関数は、 必ず `test_` で始まるようにすること。

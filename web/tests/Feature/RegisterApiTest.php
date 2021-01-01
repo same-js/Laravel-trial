@@ -17,7 +17,7 @@ use RefreshDatabase;
      * - レスポンス取得が正しくできること
      * @return void
      */
-    public function should_return_new_user ()
+    public function test_create_new_user ()
     {
         // 登録データ
         $data = [
@@ -28,7 +28,7 @@ use RefreshDatabase;
         ];
 
         // 会員登録リクエスト送信
-        $response = $this->json('POST', route('register').$data );
+        $response = $this->json('POST', route('register'), $data );
 
         // 会員登録したデータの取得
         $user = User::first();

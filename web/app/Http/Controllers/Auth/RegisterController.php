@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -69,5 +70,17 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * `Illuminate\Foundation\Auth\RegistersUsers@registered` をオーバーライド。
+     * 会員登録が正常に完了した後に実行すべき処理を実装する。
+     * @param  Request $request
+     * @param  User $user
+     * @return User
+     */
+    protected function registered(Request $request, $user)
+    {
+        return $user;
     }
 }

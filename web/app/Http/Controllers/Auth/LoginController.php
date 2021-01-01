@@ -47,4 +47,16 @@ class LoginController extends Controller
     protected function authenticated (Request $request, $user) {
         return $user;
     }
+
+    /**
+     * `Illuminate\Foundation\Auth\AuthenticatesUsers@loggedOut` をオーバーライド。
+     * ログアウト成功後に実行すべき処理を実装する。
+     * @param  Request $request
+     * @return Response
+     */
+    public function loggedOut (Request $request) {
+        // セッションIDを再生成する
+        $request->session()->regenerate();
+        return response()->json();
+    }
 }

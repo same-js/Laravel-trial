@@ -1,0 +1,19 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Below from here, added by same-js.
+public/css/app.css
+public/js/app.js
+public/js/manifest.js
+public/js/vendor.js
+public/mix-manifest.json

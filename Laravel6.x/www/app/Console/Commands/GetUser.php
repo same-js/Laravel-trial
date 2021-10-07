@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\Models\User;
 class GetUser extends Command
 {
     /**
@@ -11,7 +11,7 @@ class GetUser extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'get:user {email}';
 
     /**
      * The console command description.
@@ -37,6 +37,16 @@ class GetUser extends Command
      */
     public function handle()
     {
-        //
+        $email = $this->argument('email');
+        $user = $this->getUser(email: $email);
+        echo $user->name . "\n";
+    }
+    
+    public function getUser(string $email): User
+    {
+        $result = User::select()
+            ->where('email', 'LIKE', "%{$email}%")
+            ->first();
+        return $result ?? new User;
     }
 }

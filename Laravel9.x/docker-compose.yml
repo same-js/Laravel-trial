@@ -1,0 +1,52 @@
+# 備考
+# {DB_NAME} と記載すると .envファイルのDB_NAMEを参照できる
+
+# compose ファイルフォーマットのバージョン。
+# バージョンにより、compose file （docker-compose.yml）の書き方が異なる
+version: '3'
+
+# アプリケーションを動かすための各要素（DB、webサーバなど）の設定を記載
+# build:
+#   - Dockerfileの置き場所（ComposeFileを実行し、ビルドされるときのpath）
+# volumes:
+#   - マウントする設定ファイルのpath。
+#   - コロン（:）がある場合、左側のホストOSのパスのデータが、右側のコンテナのパスにマウントされる
+# ports:
+#   - Imageを立ち上げる時のポート番号。
+#   - <Host IP>:<Host Port>:<Container Port> の形式で書く
+# restart:
+#   - 再起動ポリシーの設定。
+#   - 「- restart: always」 と記述すると、Dockerデーモンの起動時やホストOSの起動時に、自動的にコンテナが開始される
+#   - ただし、開発時には有効にしないほうが良いかもしれない
+services:
+  # PHP
+  www:
+    build: .
+    volumes:
+      - ./Docker/Server/root/.vimrc:/root/.vimrc
+      - ./Docker/Server/usr/local/etc/php/conf.d/mailhog.ini:/usr/local/etc/php/conf.d/mailhog.ini
+      - ./www/:/var/www/
+    ports:
+      - 80:80 # apache の場合は 送信元 port:80が使用される
+      - 3000:3000
+  # MySQL
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./Docker/MySQL/var/lib/mysql:/var/lib/mysql # データベースの実体
+      - ./Docker/MySQL/conf.d:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306
+  
+  # mailhog
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025

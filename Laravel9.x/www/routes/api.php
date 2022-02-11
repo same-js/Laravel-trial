@@ -15,7 +15,10 @@ use App\Models\User;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/**
+ * 正常なパーソナルアクセストークンが設定されているリクエストの場合のみ、ユーザ情報をレスポンスとして返却する
+ */
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 

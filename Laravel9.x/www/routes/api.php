@@ -32,3 +32,10 @@ Route::get('/publish-token/{id}', fn(string $id)
         [ 'token' => User::find($id)->createToken('Test Token')->accessToken ],
     )
 );
+
+/**
+ * 認証エラー時のレスポンスをここで定義する
+ * このルーティングが必要なのは、認証エラー時に Laravel の内部仕様により
+ * route alias = login で定義したレスポンスが返却されるためである
+ */
+Route::get('error', fn() => response()->json(['status' => 'error']) )->name('login');

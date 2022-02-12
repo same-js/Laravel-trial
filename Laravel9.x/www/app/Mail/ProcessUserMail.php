@@ -28,6 +28,6 @@ class ProcessUserMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('no-reply@example.com', '管理者')->view('email.process-user');
     }
 }

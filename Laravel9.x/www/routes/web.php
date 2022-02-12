@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\ProcessUserMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +22,13 @@ Route::get('/', function () {
 Route::get('phpinfo', function () {
     echo phpinfo();
     return;
+});
+
+Route::get('queue',  function () {
+    \App\Jobs\ProcessUser::dispatch();
+    echo '現在処理中です。完了したらメールを送信します。';
+});
+
+Route::get('mail', function () {
+    Mail::to('test@exmaple.com')->send(new ProcessUserMail);
 });

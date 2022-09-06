@@ -32,3 +32,11 @@ Route::get('queue',  function () {
 Route::get('mail', function () {
     Mail::to('test@exmaple.com')->send(new ProcessUserMail);
 });
+
+Route::post('post',  function () {
+
+});
+
+Route::get('exception',  function () {
+    throw new \Exception();
+});
